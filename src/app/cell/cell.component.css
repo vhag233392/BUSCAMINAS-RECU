@@ -1,0 +1,20 @@
+
+.cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: lightgray;
+}
+.revealed {
+  background-color: white;
+}
+.mine {
+  background-color: red;
+}
+.flagged {
+  background-color: yellow;
+}

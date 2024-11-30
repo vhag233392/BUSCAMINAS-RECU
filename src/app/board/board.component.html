@@ -1,0 +1,15 @@
+
+<div class="board" *ngIf="!gameOver">
+  <div class="row" *ngFor="let row of board">
+    <app-cell
+      *ngFor="let cell of row"
+      [cell]="cell"
+      (cellClick)="onCellClick($event)"
+      (cellRightClick)="onRightClick($event)"
+    ></app-cell>
+  </div>
+</div>
+<div *ngIf="gameOver" class="game-over">
+  Game Over! 💥
+  <button (click)="restartGame()">Restart</button>
+</div>
