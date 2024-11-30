@@ -9,13 +9,26 @@ import {Cell} from '../cell.model';
   templateUrl: './board.component.html',
   styleUrl: './board.component.css'
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
+
   board: Cell[][] = [];
   gameOver = false;
+  boardSize: number;
+  mineCount: number;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService) {
+    this.boardSize = gameService.getBoardSize();
+    this.mineCount = gameService.getMineCount();
+  }
 
   ngOnInit() {
+    this.board = this.gameService.getBoard();
+  }
+
+  startNewGame() {
+    // Iniciar nuevo juego con los parámetros seleccionados
+    this.gameOver = false;
+    this.gameService.initializeBoard(this.boardSize, this.mineCount);
     this.board = this.gameService.getBoard();
   }
 
@@ -38,8 +51,6 @@ export class BoardComponent {
   }
 
   restartGame() {
-    this.gameOver = false;
-    this.gameService.initializeBoard();
-    this.board = this.gameService.getBoard();
+    this.startNewGame();
   }
 }

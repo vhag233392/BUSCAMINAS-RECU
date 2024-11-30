@@ -1,4 +1,26 @@
 
+<div class="game-controls">
+  <div class="input-group">
+    <label>Tamaño del tablero:</label>
+    <input
+      type="number"
+      [(ngModel)]="boardSize"
+      min="4"
+      max="20"
+    >
+  </div>
+  <div class="input-group">
+    <label>Número de minas:</label>
+    <input
+      type="number"
+      [(ngModel)]="mineCount"
+      [min]="1"
+      [max]="boardSize * boardSize - 1"
+    >
+  </div>
+  <button (click)="startNewGame()">Nuevo Juego</button>
+</div>
+
 <div class="board" *ngIf="!gameOver">
   <div class="row" *ngFor="let row of board">
     <app-cell

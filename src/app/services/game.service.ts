@@ -1,20 +1,28 @@
-
+// src/app/services/game.service.ts
 import { Injectable } from '@angular/core';
-import { Cell } from '../cell.model';
+import {Cell} from '../cell.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  private boardSize = 10;
-  private mineCount = 10;
+
+  private boardSize: number;
+  private mineCount: number;
   private board: Cell[][] = [];
 
   constructor() {
+    // Valores por defecto
+    this.boardSize = 10;
+    this.mineCount = 10;
     this.initializeBoard();
   }
 
-  initializeBoard() {
+  initializeBoard(size: number = 10, mines: number = 10) {
+    // Validar que el número de minas no sea mayor al número de celdas
+    this.boardSize = size;
+    this.mineCount = Math.min(mines, size * size - 1);
+
     // Crear tablero vacío
     this.board = Array(this.boardSize).fill(null).map((_, x) =>
       Array(this.boardSize).fill(null).map((_, y) => ({
@@ -116,5 +124,13 @@ export class GameService {
 
   getBoard(): Cell[][] {
     return this.board;
+  }
+
+  getBoardSize(): number {
+    return this.boardSize;
+  }
+
+  getMineCount(): number {
+    return this.mineCount;
   }
 }
